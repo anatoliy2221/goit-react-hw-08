@@ -4,6 +4,7 @@ import { useId } from "react";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
+import { Button } from "@mui/material";
 
 
 const ContactForm = () => {
@@ -31,8 +32,7 @@ const ContactForm = () => {
   const phoneFieldId = useId();
 
 const handleSubmit = (values, action) => {
-  const newContact = values;
-  dispatch(addContact(newContact));
+  dispatch(addContact(values));
   action.resetForm();
 }  
 
@@ -59,9 +59,9 @@ return (
           id={phoneFieldId}
         ></Field>
         <ErrorMessage className={css.error} name="number" component="span" />
-        <button className={css.button} type="submit">
+        <Button variant="contained" size="small" type="submit">
           Add contact
-        </button>
+        </Button>
       </Form>
     </Formik>
   );

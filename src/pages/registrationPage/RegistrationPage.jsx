@@ -1,15 +1,12 @@
-import DocumentTitle from "../../components/DocumentTitle";
+import { Container } from "@mui/material";
 import RegistrationForm from "../../components/registrationForm/RegistrationForm";
-
-
 
 const RegistrationPage = () => {
   return (
-    <div>
-      <DocumentTitle>Registration</DocumentTitle>
+    <Container  maxWidth="sm">
       <RegistrationForm />
-    </div>
+    </Container>
   )
 }
 
-export default RegistrationPage
+export default RegistrationPage;

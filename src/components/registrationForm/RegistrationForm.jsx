@@ -4,17 +4,19 @@ import { useDispatch } from "react-redux";
 import * as yup from 'yup';
 import css from './RegistrationForm.module.css';
 import { register } from "../../redux/auth/operations";
+import { Button } from "@mui/material";
 
 const RegistrationForm = () => {
 
   const dispatch = useDispatch();
 
   const initialValues = {
-    username: '',
+    name: '',
     email: '',
     password: '',
   };
-  const contactShema = yup.object().shape({
+
+  const userShema = yup.object().shape({
     name: yup
       .string()
       .min(3, "Too Short!")
@@ -22,13 +24,11 @@ const RegistrationForm = () => {
       .required("Required"),
     email: yup
       .string()
-      .min(3, "Too Short!")
-      .max(50, "Too Long!")
+      .email("Must be a valid email!")
       .required("Required"),
     password: yup
       .string()
-      .min(7, "Too short")
-      .max(13, "Too long")
+      .min(8, "Password must be min 8 characters!")
       .required("Required"),
   });
   
@@ -37,8 +37,7 @@ const RegistrationForm = () => {
   const passwordFieldId = useId();
 
   const handleSubmit = (values, action) => {
-    const user = values;
-    dispatch(register(user));
+    dispatch(register(values));
     action.resetForm();
   }
 
@@ -46,7 +45,7 @@ const RegistrationForm = () => {
     <Formik
     initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={contactShema}>
+      validationSchema={userShema}>
       <Form className={css.form}>
       <label htmlFor={usernameFieldId}>
           Username
@@ -54,7 +53,7 @@ const RegistrationForm = () => {
         <Field  className={css.field}
           type="text"
           name="name"
-          id={emailFieldId} ></Field>
+          id={emailFieldId}></Field>
           <ErrorMessage className={css.error} name="name" component="span" />
         <label htmlFor={emailFieldId}>
           Email
@@ -73,7 +72,7 @@ const RegistrationForm = () => {
           name="password"
           id={passwordFieldId}></Field>
           <ErrorMessage className={css.error} name="password" component="span" />
-        <button type="submit">Register</button>
+        <Button variant="contained" type="submit">Register</Button>
       </Form>
     </Formik>
   )

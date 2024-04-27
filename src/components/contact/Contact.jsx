@@ -3,6 +3,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import css from "./Contact.module.css";
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations";
+import { Button } from "@mui/material";
 
 
 const Contact = ({ contact }) => {
@@ -23,9 +24,9 @@ const Contact = ({ contact }) => {
           <p>{contact.number}</p>
         </div>
       </div>
-      <button className={css.button} onClick={handleDelete}>
+      <Button variant="contained" color="primary" size="small" onClick={handleDelete}>
         Delete
-      </button>
+      </Button>
     </div>
   );
 };

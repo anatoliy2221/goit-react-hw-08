@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import * as yup from 'yup';
 import css from './LoginForm.module.css';
 import { logIn } from "../../redux/auth/operations";
+import { Button } from "@mui/material";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const LoginForm = () => {
     email: '',
     password: '',
   };
-  const contactShema = yup.object().shape({
+  const userShema = yup.object().shape({
     email: yup
       .string()
       .min(3, "Too Short!")
@@ -20,8 +21,7 @@ const LoginForm = () => {
       .required("Required"),
     password: yup
       .string()
-      .min(7, "Too short")
-      .max(13, "Too long")
+      .min(8, "Password must be min 8 characters!")
       .required("Required"),
   });
   
@@ -29,16 +29,15 @@ const LoginForm = () => {
   const passwordFieldId = useId();
 
   const handleSubmit = (values, action) => {
-    const user = values;
-    dispatch(logIn(user));
+    dispatch(logIn(values));
     action.resetForm();
   }
 
   return (
-    <Formik
+    <Formik 
     initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={contactShema}>
+      validationSchema={userShema}>
       <Form className={css.form}>
         <label htmlFor={emailFieldId}>
           Email
@@ -57,7 +56,7 @@ const LoginForm = () => {
           name="password"
           id={passwordFieldId}></Field>
           <ErrorMessage className={css.error} name="password" component="span" />
-        <button type="submit">Log in</button>
+        <Button variant="contained" type="submit">Log in</Button>
       </Form>
     </Formik>
   )

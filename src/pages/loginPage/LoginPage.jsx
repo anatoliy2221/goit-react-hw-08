@@ -1,13 +1,11 @@
-import DocumentTitle from "../../components/DocumentTitle";
+import { Container } from "@mui/material";
 import LoginForm from "../../components/loginForm/LoginForm";
-
 
 const LoginPage = () => {
   return (
-    <div>
-       <DocumentTitle>Login</DocumentTitle>
+    <Container  maxWidth="sm">
       <LoginForm />
-    </div>
+    </Container>
   )
 }
 
